@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}
+Vehicle Details
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% if result %}
+        <p><b>Manufacturer Name</b>: {{ result.manufacturer_name }}</p>
+        <p><b>Model Name</b>: {{ result.model_name }}</p>
+        <p><b>Vehicle Type</b>: {{ result.vehicle_type_name }}</p>
+        <p><b>Model Year</b>: {{ result.model_year }}</p>
+        <p><b>Mileage</b>: {{ result.mileage }}</p>
+        <p><b>Car Condition</b>: {{ result.car_condition }}</p>
+        <p><b>Price</b>: {{ result.sales_price }}</p>
+        <p><b>Description</b>: {{ result.description }}</p>
+            {% if session['manager'] %}
+                <p><b>Inventory Start Date</b>: {{ result.invent_start_dt }}</p>
+                <p><b>Sales Date</b>: {{ result.sales_date }}</p>
+                <br><p style="font-size:130%;">Clerk Information</p>
+                <p><b>Clerk username</b>: {{ result.clerk }}</p>
+                <p><b>Clerk Name</b>: {{ result.res_clerk.clerk_first_name }} {{ result.res_clerk.clerk_last_name }}</p>
+                <br><p style="font-size:130%;">Salesperson Information</p>
+                <p><b>Salesperson Username</b>: {{ result.salesperson }}</p>
+                <p><b>Salesperson Name</b>: {{ result.res_sales.sales_first_name }} {{ result.res_sales.sales_last_name }}</p>
+            {% endif %}
+            {% if session['clerk'] or session['manager'] %}
+                <br><p style="font-size:130%;">Seller Information</p>
+                <p><b>Seller Customer ID</b>: {{ result.seller_customerID }}</p>
+                {% if result.res_seller.TIN != None %}
+                    <p><b>Seller Name</b>: {{ result.res_seller.customer_name }}</p>
+                    <p><b>Primary Contact</b>: {{ result.res_seller.primary_contact }}</p>
+                    <p><b>Primary Contact Title</b>: {{ result.res_seller.primary_contact_title }}</p>
+                    <p><b>Email</b>: {{ result.res_seller.email }}</p>
+                    <p><b>Phone Number</b>: {{ result.res_seller.phone_num }}</p>
+                    <p><b>Address</b>: {{ result.res_seller.street + ', ' + result.res_seller.city + ', ' + result.res_seller.state + ' ' + result.res_seller.zip_code }}</p>
+                {% else %}
+                    <p><b>Seller Name</b>: {{ result.res_seller.customer_name }}</p>
+                    <p><b>Email</b>: {{ result.res_seller.email }}</p>
+                    <p><b>Phone Number</b>: {{ result.res_seller.phone_num }}</p>
+                    <p><b>Address</b>: {{ result.res_seller.street + ', ' + result.res_seller.city + ', ' + result.res_seller.state + ' ' + result.res_seller.zip_code }}</p>
+                {% endif %}
+            {% endif %}
+            {% if session['manager'] %}
+                <br><p style="font-size:130%;">Buyer Information</p>
+                <p><b>Buyer Customer ID</b>: {{ result.buyer_customerID }}</p>
+                {% if result.res_seller.TIN != None %}
+                    <p><b>Buyer Name</b>: {{ result.res_buyer.customer_name }}</p>
+                    <p><b>Primary Contact</b>: {{ result.res_buyer.primary_contact }}</p>
+                    <p><b>Primary Contact Title</b>: {{ result.res_buyer.primary_contact_title }}</p>
+                    <p><b>Email</b>: {{ result.res_buyer.email }}</p>
+                    <p><b>Phone Number</b>: {{ result.res_buyer.phone_num }}</p>
+                    <p><b>Address</b>: {{ result.res_buyer.street + ', ' + result.res_buyer.city + ', ' + result.res_buyer.state + ' ' + result.res_buyer.zip_code }}</p>
+                {% else %}
+                    <p><b>Buyer Name</b>: {{ result.res_buyer.customer_name }}</p>
+                    <p><b>Email</b>: {{ result.res_buyer.email }}</p>
+                    <p><b>Phone Number</b>: {{ result.res_buyer.phone_num }}</p>
+                    <p><b>Address</b>: {{ result.res_buyer.street + ', ' + result.res_buyer.city + ', ' + result.res_buyer.state + ' ' + result.res_buyer.zip_code }}</p>
+                {% endif %}
+            {% endif %}
+        <p>
+            {% if session['saleperson'] %}
+                {% if result.sales_date == None %}
+                    <a class="btn btn-primary" style="margin-right:2.5em" href="{{ url_for('record_sales') }}">Sell Car</a>
+                {% endif %}
+            {% endif %}
+
+            {% if session['manager'] or session['clerk'] %}
+
+                <a class="btn btn-primary" href="{{ url_for('add_repair') }}">View Repair</a>
+            {% endif %}
+        </p>
+    {% endif %}
+</div> <!-- /container -->
+{% endblock %}

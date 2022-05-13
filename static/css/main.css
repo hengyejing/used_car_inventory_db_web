@@ -1,0 +1,24 @@
+.footer-container {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    height: 45px;
+    z-index: 3;
+    background-color: #303131 !important;
+}
+
+.main-content {
+    padding-bottom: 50px;
+}
+
+.form-signin {
+    max-width: 500px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.team-info {
+    color: #fff !important;
+    padding-top: 10px;
+    margin-left: 30px;
+}

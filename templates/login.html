@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+Please Sign in
+{%  endblock %}
+
+{% block content %}
+<div class="container">
+
+    <form class="form-signin" method="GET" action="getuser">
+        {% if inValidUser %}
+        <div class="alert alert-danger">
+            <strong>Danger!</strong> This is not an valid user, try again.
+        </div>
+        {%  endif %}
+
+        <div class="form-group">
+            <label for="exampleInputusername1">Username</label>
+            <input type="username" class="form-control" id="username" name="username" aria-describedby="usernameHelp"
+                placeholder="Enter username" required autofocus>
+
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+</div> <!-- /container -->
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+Record Sales Order
+{%  endblock %}
+
+<head>
+  <!-- Include Date Range Picker -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+  <script type=text/javascript>
+    $.fn.datepicker.defaults.format = "yyyy-mm-dd";
+    $(document).ready(function() {
+      $( "#sales_date" ).datepicker();
+    });
+  </script>
+</head>
+
+{% block content %}
+<div class="container">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{message}}
+          </div>
+       {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <div>
+        <div id="search_customer">
+          {{ wtf.quick_form(search_customer_form, button_map={'search_customer_button': 'primary'}) }}
+        </div>
+        <br><br>
+        <div class="form-group row">
+          <label for="customer ID" class="col-sm-2 col-form-label">Customer ID</label>
+          <label for="customer ID" class="col-sm-10 col-form-label">{{ session['customerID'] }}</label>
+        </div>
+        <div class="form-group row">
+          <label for="customer ID" class="col-sm-2 col-form-label">Customer Name</label>
+          <label for="customer ID" class="col-sm-10 col-form-label">{{ session['customerName'] }}</label>
+        </div>
+        <div class="form-group row">
+          <label for="customer ID" class="col-sm-2 col-form-label">Sales Price</label>
+          <label for="customer ID" class="col-sm-10 col-form-label">{{ session['sales_price'] }}</label>
+        </div>
+        <div id="record_sales">
+          {{ wtf.quick_form(record_sales_form, button_map={'record_sales_button': 'primary'}) }}
+        </div>
+    </div>
+</div> <!-- /container -->
+{% endblock %}

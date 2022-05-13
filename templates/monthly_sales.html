@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+Monthly Sales Report
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h4>Monthly Sales Report</h4>
+    <br>
+    {% if result %}
+    <table class="table">
+    <thead class="thead-light">
+    <tr>
+        <th scope="col">Year</th>
+        <th scope="col">Month</th>
+        <th scope="col">Total number of vehicles sold</th>
+        <th scope="col">Total sales income</th>
+        <th scope="col">Total net income</th>
+    </tr>
+    {% for row in result %}
+      <tr>
+          <td> <a href="{{ '/report/yearly_sales_rank/%s'%row.year }}">{{ row.year }}</a></td>
+          <td> <a href="{{ '/report/monthly_sales_rank/%s/%s'%(row.year, row.month)}}">{{ row.month }}</a></td>
+          <td> {{ row.total_number_of_vehicles_sold }}</td>
+          <td> {{ row.total_sales_income }}</td>
+          <td> {{ row.total_net_income }}</td>
+      </tr>
+    {% endfor %}
+    </table>
+    {% endif %}
+</div> <!-- /container -->
+{% endblock %}

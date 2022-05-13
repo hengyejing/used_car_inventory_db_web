@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+Inventory Age Report
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% if result %}
+    <table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Vehicle Type</th>
+            <th scope="col">Min Days in Inventory</th>
+            <th scope="col">Average Days in Inventory</th>
+            <th scope="col">Max Days in Inventory</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in result %}
+          <tr>
+                <td> {{ row.vehicle_type_name }}</td>
+                <td> {{ row.minimum_days_in_inventory }}</td>
+                <td> {{ row.average_days_in_inventory }}</td>
+                <td> {{ row.maximum_days_in_inventory }}</td>
+          </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+    {% endif %}
+</div> <!-- /container -->
+{% endblock %}

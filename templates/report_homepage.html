@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}
+Report Homepage
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="list-group">
+        <a href="/report/seller_history" class="list-group-item list-group-item-action">
+            Seller History Report
+        </a>
+        <a href="/report/inventory_age" class="list-group-item list-group-item-action">
+            Inventory Age Report
+        </a>
+        <a href="/report/average_inventory" class="list-group-item list-group-item-action">
+            Average Time in Inventory Report
+        </a>
+        <a href="/report/price_condition" class="list-group-item list-group-item-action">
+            Price per Condition Report
+        </a>
+        <a href="/report/repair_statistics" class="list-group-item list-group-item-action">
+            Repair Statistics Report
+        </a>
+        <a href="/report/monthly_sales" class="list-group-item list-group-item-action">
+            Monthly Sales Report
+        </a>
+    </div>
+</div> <!-- /container -->
+{% endblock %}

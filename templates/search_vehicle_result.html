@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+Search Result
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <title>Vehicle Search Results</title>
+    <p>
+        {% if result %}
+            {% if session["clerk"] %}
+                <p><b>Total Unsold Vehicles</b>: {{ result[0] }}</p>
+                <p><b>Vehicles Under Repair</b>: {{ result[1] }}</p>
+                <p><b>Available Vehicles</b>: {{ result[2] }}</p>
+            {% endif %}
+        {% endif %}
+    </p>
+    {{ table }}
+</div>
+{% endblock %}

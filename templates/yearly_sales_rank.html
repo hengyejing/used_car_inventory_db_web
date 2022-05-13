@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+Top Sales of the Year {{year}}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h4>Top sales of the year {{year}}</h4>
+    <br>
+    {% if result %}
+    <table class="table">
+    <thead class="thead-light">
+    <tr>
+        <th>Name</th>
+        <th>Total vehicles sold</th>
+        <th>Total sales</th>
+    </tr>
+    {% for row in result %}
+      <tr>
+          <td> {{ row.name }}</td>
+          <td> {{ row.total_vehicles_sold }}</td>
+          <td> {{ row.total_sales }}</td>
+      </tr>
+    {% endfor %}
+    </table>
+    {% endif %}
+</div> <!-- /container -->
+{% endblock %}

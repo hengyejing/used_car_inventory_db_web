@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <script src="{{ url_for('static', filename='js/modernizr-2.6.2-respond-1.1.0.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+        <a class="my-0 mr-md-auto font-weight-normal" href="{{ url_for('home') }}">
+            <h5> Burdell’s Ramblin’ Wrecks</h5>
+        </a>
+        <nav class="my-2 my-md-0 mr-md-3">
+            {% if session['clerk'] %}
+                <a class="p-2 text-dark" href="{{ url_for('add_vehicle') }}">Add Vehicle</a>
+                <a class="p-2 text-dark" href="{{ url_for('add_repair') }}">Add Repair</a>
+            {% endif %}
+
+            {% if session['saleperson'] %}
+                <a class="p-2 text-dark" href="{{ url_for('add_customer') }}">Add Customer</a>
+            {% endif %}
+
+            {% if session['manager'] %}
+                <a class="p-2 text-dark" href="{{ url_for('report_homepage') }}">View Report</a>
+            {% endif %}
+        </nav>
+
+
+        {% if not session['username'] %}
+        <a class="btn btn-outline-primary" href="{{ url_for('login') }}">Log in</a> {% else %}
+        <span class="btn btn-success"> welcome {{session['firstname']}}</span>
+        <a class="btn btn-outline-primary" href="{{ url_for('logout') }}">Log out</a> {% endif %}
+    </div>
+
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">
+            {% block title %} {% endblock %}
+        </h1>
+    </div>
+
+    <div class="container main-content">
+        {% block content %} {% endblock %}
+    </div>
+
+    <footer class="">
+        <div class="footer-container border-top">
+            <div class="row">       
+                    <p class="team-info">OMSCS6300 - Database Final Porject Team 20</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

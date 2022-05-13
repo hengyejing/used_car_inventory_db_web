@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+Search Vehicle
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{message}}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <div>
+      <form class="form form-horizontal" method="post" role="form">
+        {{ form.hidden_tag() }}
+        {{ wtf.form_errors(form, hiddens="only") }}
+        {% if session['username'] %}
+          {{ wtf.form_field(form.vin) }}
+        {% endif %}
+        {{ wtf.form_field(form.keyword) }}
+        {{ wtf.form_field(form.model_year) }}
+        {{ wtf.form_field(form.vehicle_type_name) }}
+        {{ wtf.form_field(form.manufacturer) }}
+        {{ wtf.form_field(form.colors) }}
+        {{ wtf.form_field(form.sortby) }}
+        {{ wtf.form_field(form.filterby) }}
+        {{ wtf.form_field(form.submit_button, button_map={'submit_button' : 'primary'}) }}
+      </form>
+    </div>
+</div> <!-- /container -->
+{% endblock %}

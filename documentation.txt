@@ -1,0 +1,6 @@
+user permission setup
+
+how to control setting things
+{% if session['clerk'] %} or 'saleperson' or 'manager'
+    your html control
+{% endif %}

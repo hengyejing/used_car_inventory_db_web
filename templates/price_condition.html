@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+Price per Condition Report
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h4>Price per Condition Report</h4>
+    <br>
+    {% if result %}
+    <table class="table">
+    <thead class="thead-light">
+    <tr>
+        <th>Vehicle type name</th>
+        <th>Excllent</th>
+        <th>Very Good</th>
+        <th>Good</th>
+        <th>Fair</th>
+    </tr>
+    {% for row in result %}
+      <tr>
+          <td> {{ row.vehicle_type_name }}</td>
+          <td> {{ row.Excellent }}</td>
+          <td> {{ row.Very_Good }}</td>
+          <td> {{ row.Good }}</td>
+          <td> {{ row.Fair }}</td>
+      </tr>
+    {% endfor %}
+    </table>
+    {% endif %}
+</div> <!-- /container -->
+{% endblock %}
